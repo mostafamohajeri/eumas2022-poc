@@ -12,8 +12,8 @@ To build the project: `sbt compile`
 
 To run the example scenario(s): `sbt test`
 
-The agent's codes can be found in [this](/mostafamohajeri/eumas2022-poc/src/main/asl) directory
+The agent's codes can be found in [this](https://github.com/mostafamohajeri/eumas2022-poc/tree/main/src/main/asl) directory
 
-The norms file can be found [here](/mostafamohajeri/eumas2022-poc/src/main/eflint/buy.eflint)
+The norms file can be found [here](https://github.com/mostafamohajeri/eumas2022-poc/tree/main/src/main/eflint)
 
 
