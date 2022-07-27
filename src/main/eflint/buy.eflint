@@ -1,0 +1,52 @@
+Fact person
+Placeholder buyer  For person
+Placeholder seller For person
+Fact item
+Fact amount Identified by 1..10
+
+
+Duty duty_to_pay
+  Holder buyer
+  Claimant seller
+  Related to amount
+
+Duty duty_to_deliver
+  Holder seller
+  Claimant buyer
+  Related to item
+
+Act offer
+  Actor seller
+  Recipient buyer
+  Related to item, amount
+  Holds when True
+  Creates accept(buyer, seller, item, amount)
+
+Act accept
+  Actor buyer
+  Recipient seller
+  Related to item, amount
+  Creates 
+    pay(buyer, seller, amount),
+    duty_to_pay(buyer, seller, amount),
+    deliver(seller, buyer, item),
+    duty_to_deliver(seller, buyer, item)
+  Terminates 
+    accept(buyer = buyer, item = item),
+    offer(buyer = buyer, item = item)
+
+Act pay
+  Actor buyer
+  Recipient seller
+  Related to amount
+  Conditioned by duty_to_pay(buyer, seller, amount)
+  Terminates 
+    duty_to_pay(buyer, seller, amount)
+
+Act deliver
+  Actor seller
+  Recipient buyer
+  Related to item
+  Conditioned by duty_to_deliver(seller, buyer, item)
+  Terminates
+    duty_to_deliver(seller, buyer, item)

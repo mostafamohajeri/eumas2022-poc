@@ -1,0 +1,24 @@
+@startuml
+
+participant BuyerAgent
+participant SellerAgent
+participant BuyerAdvisor
+participant SellerAdvisor
+SellerAgent->SellerAdvisor : ?permitted(offer(SellerAgent,BuyerAgent,Book,5))
+SellerAdvisor-->SellerAgent : true
+SellerAgent->SellerAdvisor : !perform(offer(SellerAgent,BuyerAgent,Book,5))
+SellerAgent->BuyerAgent : +offer(Book,5)
+BuyerAgent->BuyerAdvisor : !perform(offer(SellerAgent,BuyerAgent,Book,5))
+BuyerAdvisor->BuyerAgent : +purchase(SellerAgent,Book,5)
+BuyerAgent->SellerAgent : +accept(Book,5)
+SellerAgent->SellerAdvisor : ?perform(accept(BuyerAgent,SellerAgent,Book,5))
+SellerAdvisor-->SellerAgent : true
+SellerAgent->BuyerAgent : +acknowledge(accept(Book,5),true)
+BuyerAgent->BuyerAdvisor : !perform(accept(BuyerAgent,SellerAgent,Book,5))
+SellerAdvisor->SellerAgent : !deliver(BuyerAgent,Book)
+SellerAdvisor->SellerAgent : !expect_pay(BuyerAgent,5)
+BuyerAdvisor->BuyerAgent : !pay(SellerAgent,5)
+BuyerAdvisor->BuyerAgent : !expect_deliver(SellerAgent,Book)
+BuyerAgent->BuyerAdvisor : !perform(pay(BuyerAgent,SellerAgent,5))
+
+@enduml
